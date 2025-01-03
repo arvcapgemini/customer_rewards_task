@@ -25,12 +25,12 @@ public class CustomerRewardsServiceImpl implements CustomerRewardsService {
         Timestamp lastSecondMonthTimestamp = getDateBasedOnOffSetDays(2*CustomerConstants.daysInMonths);
         Timestamp lastThirdMonthTimestamp = getDateBasedOnOffSetDays(3*CustomerConstants.daysInMonths);
 
-        List<TransactionDetails> lastMonthTransactions = customerTransactionRepository.findAllCustomerByIdAndTransactionDateBetween(
+        List<TransactionDetails> lastMonthTransactions = customerTransactionRepository.findAllByCustomerIdAndTransactionDateBetween(
                 customerId, lastMonthTimestamp, Timestamp.from(Instant.now()));
         List<TransactionDetails> lastSecondMonthTransactions = customerTransactionRepository
-                .findAllCustomerByIdAndTransactionDateBetween(customerId, lastSecondMonthTimestamp, lastMonthTimestamp);
+                .findAllByCustomerIdAndTransactionDateBetween(customerId, lastSecondMonthTimestamp, lastMonthTimestamp);
         List<TransactionDetails> lastThirdMonthTransactions = customerTransactionRepository
-                .findAllCustomerByIdAndTransactionDateBetween(customerId, lastThirdMonthTimestamp,
+                .findAllByCustomerIdAndTransactionDateBetween(customerId, lastThirdMonthTimestamp,
                         lastSecondMonthTimestamp);
 
         Long lastMonthRewardPoints = getRewardsPerMonth(lastMonthTransactions);
@@ -54,10 +54,10 @@ public class CustomerRewardsServiceImpl implements CustomerRewardsService {
     }
 
     private Long calculateRewards(TransactionDetails t) {
-        if (t.getTransAmount() > CustomerConstants.firstRewardLimit && t.getTransAmount() <= CustomerConstants.secondRewardLimit) {
-            return Math.round(t.getTransAmount() - CustomerConstants.firstRewardLimit);
-        } else if (t.getTransAmount() > CustomerConstants.secondRewardLimit) {
-            return Math.round(t.getTransAmount() - CustomerConstants.secondRewardLimit) * 2
+        if (t.getTransactionAmount() > CustomerConstants.firstRewardLimit && t.getTransactionAmount() <= CustomerConstants.secondRewardLimit) {
+            return Math.round(t.getTransactionAmount() - CustomerConstants.firstRewardLimit);
+        } else if (t.getTransactionAmount() > CustomerConstants.secondRewardLimit) {
+            return Math.round(t.getTransactionAmount() - CustomerConstants.secondRewardLimit) * 2
                     + (CustomerConstants.secondRewardLimit - CustomerConstants.firstRewardLimit);
         } else
             return 0l;

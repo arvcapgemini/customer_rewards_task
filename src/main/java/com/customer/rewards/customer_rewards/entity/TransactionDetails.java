@@ -5,53 +5,52 @@ import jakarta.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name="TRANS_DETAILS")
+@Table(name="TRANSACTION_DETAILS")
 public class TransactionDetails {
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     @Column(name = "TRANSACTION_ID")
-    private Long transId;
+    private Long id;
+
+    public Long getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
+    }
+
+    public Timestamp getTransactionDate() {
+        return transactionDate;
+    }
+
+    public void setTransactionDate(Timestamp transactionDate) {
+        this.transactionDate = transactionDate;
+    }
+
+    public double getTransactionAmount() {
+        return transactionAmount;
+    }
+
+    public void setTransactionAmount(double transactionAmount) {
+        this.transactionAmount = transactionAmount;
+    }
 
     @Column(name="CUSTOMER_ID")
-    private Long custId;
+    private Long customerId;
 
     @Column(name = "TRANSACTION_DATE")
-    private Timestamp transDate;
+    private Timestamp transactionDate;
 
     @Column(name = "AMOUNT")
-    private double transAmount;
-
-    public Long getTransId() {
-        return transId;
-    }
-
-    public void setTransId(Long transId) {
-        this.transId = transId;
-    }
-
-    public Long getCustId() {
-        return custId;
-    }
-
-    public void setCustId(Long custId) {
-        this.custId = custId;
-    }
-
-    public Timestamp getTransDate() {
-        return transDate;
-    }
-
-    public void setTransDate(Timestamp transDate) {
-        this.transDate = transDate;
-    }
-
-    public double getTransAmount() {
-        return transAmount;
-    }
-
-    public void setTransAmount(double transAmount) {
-        this.transAmount = transAmount;
-    }
-
+    private double transactionAmount;
 
 }
