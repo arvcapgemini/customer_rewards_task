@@ -13,15 +13,24 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Rest Controller
+ * Author: Aravindh Andhonisamy
+ */
 @RestController
 @RequestMapping("/customer-rewards")
 public class CustomerRewardsController {
+
     @Autowired
     CustomerRewardsService customerRewardsService;
 
     @Autowired
     CustomerRewardRepository customerRepository;
 
+    /**
+     * @param customerId
+     * @return Customer Rewards
+     */
     @GetMapping(value = "/{customerId}/rewards",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CustomerRewards> getRewardsByCustomerId(@PathVariable("customerId") Long customerId){
         CustomerDetails customerDetails = customerRepository.findCustomerById(customerId);

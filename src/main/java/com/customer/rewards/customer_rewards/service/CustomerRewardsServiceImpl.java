@@ -19,6 +19,10 @@ public class CustomerRewardsServiceImpl implements CustomerRewardsService {
     @Autowired
     CustomerTransactionRepository customerTransactionRepository;
 
+    /**
+     * @param customerId
+     * @return Customer Rewards
+     */
     public CustomerRewards getRewardsByCustomerId(Long customerId) {
 
         Timestamp lastMonthTimestamp = getDateBasedOnOffSetDays(CustomerConstants.daysInMonths);
