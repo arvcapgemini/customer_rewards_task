@@ -1,17 +1,16 @@
 package com.customer.rewards.customer_rewards.controller;
 
 import com.customer.rewards.customer_rewards.entity.CustomerDetails;
+import com.customer.rewards.customer_rewards.entity.TransactionDetails;
 import com.customer.rewards.customer_rewards.model.CustomerRewards;
 import com.customer.rewards.customer_rewards.repository.CustomerRewardRepository;
+import com.customer.rewards.customer_rewards.repository.CustomerTransactionRepository;
 import com.customer.rewards.customer_rewards.service.CustomerRewardsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Rest Controller
@@ -27,6 +26,9 @@ public class CustomerRewardsController {
     @Autowired
     CustomerRewardRepository customerRepository;
 
+    @Autowired
+    CustomerTransactionRepository customerTransactionRepository;
+
     /**
      * @param customerId
      * @return Customer Rewards
@@ -40,6 +42,20 @@ public class CustomerRewardsController {
         }
         CustomerRewards customerRewards = customerRewardsService.getRewardsByCustomerId(customerId);
         return new ResponseEntity<>(customerRewards, HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/saveCustomers",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<CustomerDetails> saveCustomer(@RequestBody CustomerDetails customer)
+    {
+        CustomerDetails customerDetails=customerRepository.save(customer);
+        return new ResponseEntity<>(customerDetails,HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/saveTransactions",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<TransactionDetails> saveTransaction(@RequestBody TransactionDetails transactionDetails)
+    {
+        TransactionDetails transactions=customerTransactionRepository.save(transactionDetails);
+        return new ResponseEntity<>(transactions,HttpStatus.OK);
     }
 
 }
