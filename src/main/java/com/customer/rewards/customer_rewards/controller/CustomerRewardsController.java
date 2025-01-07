@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * Rest Controller
- * Author: Aravindh Andhonisamy
+ * @author : Aravindh Andhonisamy
+ * **The rest API to get customer rewards based on customer Id**
  */
 @RestController
 @RequestMapping("/customer-rewards")
@@ -32,6 +33,7 @@ public class CustomerRewardsController {
     /**
      * @param customerId
      * @return Customer Rewards
+     * @apiNote **A retailer offers a rewards program to its customers, awarding points based on each recorded purchase**
      */
     @GetMapping(value = "/{customerId}/rewards",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CustomerRewards> getRewardsByCustomerId(@PathVariable("customerId") Long customerId){
@@ -44,18 +46,28 @@ public class CustomerRewardsController {
         return new ResponseEntity<>(customerRewards, HttpStatus.OK);
     }
 
+    /**
+     * @param customer
+     * @return Customer Rewards
+     * @apiNote **A retailer offers a rewards program to its customers, awarding points based on each recorded purchase**
+     * @implNote To save the customers to give the rewards
+     */
     @PostMapping(value = "/saveCustomers",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CustomerDetails> saveCustomer(@RequestBody CustomerDetails customer)
     {
         CustomerDetails customerDetails=customerRepository.save(customer);
         return new ResponseEntity<>(customerDetails,HttpStatus.OK);
     }
-
+    /**
+     * @param transactionDetails
+     * @return Customer Rewards
+     * @apiNote **A retailer offers a rewards program to its customers, awarding points based on each recorded purchase**
+     * @implNote To save the transactions to track the points
+     */
     @PostMapping(value = "/saveTransactions",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<TransactionDetails> saveTransaction(@RequestBody TransactionDetails transactionDetails)
     {
         TransactionDetails transactions=customerTransactionRepository.save(transactionDetails);
         return new ResponseEntity<>(transactions,HttpStatus.OK);
     }
-
 }

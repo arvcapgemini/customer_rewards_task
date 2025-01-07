@@ -7,6 +7,21 @@ import java.sql.Timestamp;
 @Entity
 @Table(name="TRANSACTION_DETAILS")
 public class TransactionDetails {
+
+    @Id
+    @GeneratedValue( strategy = GenerationType.IDENTITY)
+    @Column(name = "TRANSACTION_ID")
+    private Long id;
+
+    @Column(name="CUSTOMER_ID")
+    private Long customerId;
+
+    @Column(name = "TRANSACTION_DATE")
+    private Timestamp transactionDate;
+
+    @Column(name = "AMOUNT")
+    private double transactionAmount;
+
     public Long getId() {
         return id;
     }
@@ -14,11 +29,6 @@ public class TransactionDetails {
     public void setId(Long id) {
         this.id = id;
     }
-
-    @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY)
-    @Column(name = "TRANSACTION_ID")
-    private Long id;
 
     public Long getCustomerId() {
         return customerId;
@@ -43,14 +53,4 @@ public class TransactionDetails {
     public void setTransactionAmount(double transactionAmount) {
         this.transactionAmount = transactionAmount;
     }
-
-    @Column(name="CUSTOMER_ID")
-    private Long customerId;
-
-    @Column(name = "TRANSACTION_DATE")
-    private Timestamp transactionDate;
-
-    @Column(name = "AMOUNT")
-    private double transactionAmount;
-
 }

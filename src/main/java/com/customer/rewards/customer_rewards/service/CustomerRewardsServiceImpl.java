@@ -22,6 +22,7 @@ public class CustomerRewardsServiceImpl implements CustomerRewardsService {
     /**
      * @param customerId
      * @return Customer Rewards
+     * @implNote A retailer offers a rewards program to its customers, awarding points based on each recorded purchase
      */
     public CustomerRewards getRewardsByCustomerId(Long customerId) {
 

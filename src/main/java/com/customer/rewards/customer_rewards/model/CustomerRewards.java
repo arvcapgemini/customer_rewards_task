@@ -1,6 +1,13 @@
 package com.customer.rewards.customer_rewards.model;
 
 public class CustomerRewards {
+
+    private long custId;
+    private long lastMonthPoints;
+    private long lastSecondMonthPoints;
+    private long lastThirdMonthPoints;
+    private long totalCustomerRewards;
+
     public long getCustId() {
         return custId;
     }
@@ -40,10 +47,4 @@ public class CustomerRewards {
     public void setTotalCustomerRewards(long totalCustomerRewards) {
         this.totalCustomerRewards = totalCustomerRewards;
     }
-
-    private long custId;
-    private long lastMonthPoints;
-    private long lastSecondMonthPoints;
-    private long lastThirdMonthPoints;
-    private long totalCustomerRewards;
 }
