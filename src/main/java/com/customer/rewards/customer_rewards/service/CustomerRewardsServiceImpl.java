@@ -1,8 +1,10 @@
 package com.customer.rewards.customer_rewards.service;
 
 import com.customer.rewards.customer_rewards.CustomerConstants.CustomerConstants;
+import com.customer.rewards.customer_rewards.entity.CustomerDetails;
 import com.customer.rewards.customer_rewards.entity.TransactionDetails;
 import com.customer.rewards.customer_rewards.model.CustomerRewards;
+import com.customer.rewards.customer_rewards.repository.CustomerRewardRepository;
 import com.customer.rewards.customer_rewards.repository.CustomerTransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,9 @@ public class CustomerRewardsServiceImpl implements CustomerRewardsService {
 
     @Autowired
     CustomerTransactionRepository customerTransactionRepository;
+
+    @Autowired
+    CustomerRewardRepository customerRewardRepository;
 
     /**
      * @param customerId
@@ -51,6 +56,10 @@ public class CustomerRewardsServiceImpl implements CustomerRewardsService {
 
         return customerRewards;
 
+    }
+
+    public CustomerDetails saveCustomers(CustomerDetails customerDetail) {
+        return customerRewardRepository.save(customerDetail);
     }
 
     private Long getRewardsPerMonth(List<TransactionDetails> transactions) {

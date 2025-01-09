@@ -6,6 +6,7 @@ import com.customer.rewards.customer_rewards.model.CustomerRewards;
 import com.customer.rewards.customer_rewards.repository.CustomerRewardRepository;
 import com.customer.rewards.customer_rewards.repository.CustomerTransactionRepository;
 import com.customer.rewards.customer_rewards.service.CustomerRewardsService;
+import com.customer.rewards.customer_rewards.service.CustomerTransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -29,6 +30,9 @@ public class CustomerRewardsController {
 
     @Autowired
     CustomerTransactionRepository customerTransactionRepository;
+
+    @Autowired
+    CustomerTransactionService customerTransactionService;
 
     /**
      * @param customerId
@@ -55,7 +59,7 @@ public class CustomerRewardsController {
     @PostMapping(value = "/saveCustomers",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CustomerDetails> saveCustomer(@RequestBody CustomerDetails customer)
     {
-        CustomerDetails customerDetails=customerRepository.save(customer);
+        CustomerDetails customerDetails=customerRewardsService.saveCustomers(customer);
         return new ResponseEntity<>(customerDetails,HttpStatus.OK);
     }
     /**
@@ -67,7 +71,7 @@ public class CustomerRewardsController {
     @PostMapping(value = "/saveTransactions",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<TransactionDetails> saveTransaction(@RequestBody TransactionDetails transactionDetails)
     {
-        TransactionDetails transactions=customerTransactionRepository.save(transactionDetails);
+        TransactionDetails transactions=customerTransactionService.saveTransactions(transactionDetails);
         return new ResponseEntity<>(transactions,HttpStatus.OK);
     }
 }
